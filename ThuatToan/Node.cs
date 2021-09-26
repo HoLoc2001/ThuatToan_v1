@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Shapes;
@@ -75,17 +76,26 @@ namespace ThuatToan
                 Swapped = false;
                 while (current != null && current.next != null)
                 {
-                    
+                    Swap_color.start_Swap_Color(canvas1, j);
+                    MainWindow.Refresh();
+                    Thread.Sleep(TimeSpan.FromSeconds(0.5));
                     if (current.data > current.next.data)
                     {
                         Swapped = true;
+                        Swap_color.sort_Swap_Color(canvas1, j);
+                        MainWindow.Refresh();
+                        Thread.Sleep(TimeSpan.FromSeconds(0.5));
                         canvas1.Children[j].SetValue(Rectangle.HeightProperty, current.next.data);
-                        //Thread.Sleep(TimeSpan.FromSeconds(0.1));
                         canvas1.Children[j + 1].SetValue(Rectangle.HeightProperty, current.data);
                         current.data = current.data + current.next.data;
                         current.next.data = current.data - current.next.data;
                         current.data = current.data - current.next.data;
+                        MainWindow.Refresh();
+                        Thread.Sleep(TimeSpan.FromSeconds(0.5));
                     }
+                    Swap_color.end_Swap_Color(canvas1, j);
+                    MainWindow.Refresh();
+                    Thread.Sleep(TimeSpan.FromSeconds(0.5));
                     j++;
                     current = current.next;
                 }

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Diagnostics;
+using System.Windows.Threading;
 
 namespace ThuatToan
 {
@@ -23,6 +24,7 @@ namespace ThuatToan
     /// </summary>
     public partial class MainWindow : Window
     {
+        public delegate void EmptyDelegate();
         int Number;
         double[] array;
         double countWidth = 0;
@@ -45,11 +47,12 @@ namespace ThuatToan
 
         private void btnSortLinkedList_Click(object sender, RoutedEventArgs e)
         {
-            Stopwatch start = new Stopwatch();
-            start.Start();
-            ArrayToLinkedList();
-            start.Stop();
-            MessageBox.Show($"{start.Elapsed.Seconds} giay, {start.Elapsed.Milliseconds} mili giay");
+                Stopwatch start = new Stopwatch();
+                start.Start();
+                ArrayToLinkedList();
+                start.Stop();
+                MessageBox.Show($"{start.Elapsed.Seconds} giay, {start.Elapsed.Milliseconds} mili giay");
+           
         }
 
         private void btnRandom_Click(object sender, RoutedEventArgs e)
@@ -120,8 +123,9 @@ namespace ThuatToan
                     if (array[j] > array[j + 1])
                     {
                         canvas1.Children[j].SetValue(Rectangle.HeightProperty, array[j + 1]);
-                        //Thread.Sleep(TimeSpan.FromSeconds(0.1));
+                        Thread.Sleep(TimeSpan.FromSeconds(0.5));
                         canvas1.Children[j + 1].SetValue(Rectangle.HeightProperty, array[j]);
+                        Thread.Sleep(TimeSpan.FromSeconds(0.5));
                         array[j] = array[j] + array[j + 1];
                         array[j + 1] = array[j] - array[j + 1];
                         array[j] = array[j] - array[j + 1];
@@ -139,11 +143,10 @@ namespace ThuatToan
             }
             Linked_List.BubbleSort(Linked_List, canvas1);
         }
-        public void start_Swap_color(Rectangle item1, Rectangle item2)
+        
+        public static void Refresh()
         {
-            item1.Fill = new SolidColorBrush(Colors.Blue);
-            item2.Fill = new SolidColorBrush(Colors.Blue);
-
+            Dispatcher.CurrentDispatcher.Invoke(DispatcherPriority.Background, new EmptyDelegate(delegate { }));
         }
     }
 }
