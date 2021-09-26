@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Diagnostics;
 
 namespace ThuatToan
 {
@@ -76,8 +78,12 @@ namespace ThuatToan
 
         private void btnSort_Click(object sender, RoutedEventArgs e)
         {
-            //bubble_sort.Bubble_sort(array);
-            sorted();
+            Stopwatch start = new Stopwatch();
+            start.Start();
+            bubble_sort.Bubble_sort(array,canvas1);
+            //BubbleSorted();
+            start.Stop();
+            MessageBox.Show($"{start.Elapsed.Seconds} giay, {start.Elapsed.Milliseconds} mili giay");
         }
 
         void random()
@@ -86,7 +92,6 @@ namespace ThuatToan
             countWidth = 0;
             int maxWidth = 1160;
             int maxHieght = 550;
-            //int Number = Convert.ToInt32(sliderNumber.Value);
             array = new double[Number];
             for (int i = 0; i < array.Length; i++)
             {
@@ -112,37 +117,22 @@ namespace ThuatToan
                 countWidth = countWidth + (maxWidth / (double)Number);
             }
         }
-        void sorted()
+        void BubbleSorted()
         {
-            //if (canvas1 != null) { canvas1.Children.Clear(); }
-            countWidth = 0;
-            int maxWidth = 1161;
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length - 1; j++)
                 {
                     if (array[j] > array[j + 1])
                     {
-                        double a = canvas1.Children[i].DesiredSize.Height;
-                        canvas1.Children[i + 1].SetValue(Rectangle.HeightProperty, a);
-
+                        canvas1.Children[j].SetValue(Rectangle.HeightProperty, array[j + 1]);
+                        //Thread.Sleep(TimeSpan.FromSeconds(0.1));
+                        canvas1.Children[j + 1].SetValue(Rectangle.HeightProperty, array[j]);
                         array[j] = array[j] + array[j + 1];
                         array[j + 1] = array[j] - array[j + 1];
                         array[j] = array[j] - array[j + 1];
-
-                        
                     }
                 }
-                //Rectangle rtgNext = new Rectangle();
-                //rtgNext.Width = maxWidth / Number;
-                //rtgNext.Height = array[i];
-                //rtgNext.Fill = new SolidColorBrush(Colors.Black);
-                //Canvas.SetLeft(rtgNext, countWidth);
-                //Canvas.SetBottom(rtgNext, 0);
-                //canvas1.Children.Add(rtgNext);
-                //double a = canvas1.Children[i].DesiredSize.Height;
-                //canvas1.Children[i + 1].SetValue(Rectangle.HeightProperty, a);
-                //countWidth = countWidth + (maxWidth / (double)Number);
             }
         }
         public void start_Swap_color(Rectangle item1, Rectangle item2)
