@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace ThuatToan
 {
     public class Node
     {
-        public int data;
+        public double data;
         public Node next;
-        public Node(int d)
+        public Node(double d)
         {
             data = d;
             next = null;
@@ -21,7 +23,7 @@ namespace ThuatToan
     {
         public Node head;
        
-        public void InsertFront(SinglyLinkedList singlyList, int new_data)
+        public void InsertFront(SinglyLinkedList singlyList, double new_data)
         {
             Node new_node = new Node(new_data);
             new_node.next = singlyList.head;
@@ -36,7 +38,7 @@ namespace ThuatToan
             }
             return temp;
         }
-        public void InsertLast(SinglyLinkedList singlyList, int new_data)
+        public void InsertLast(SinglyLinkedList singlyList, double new_data)
         {
             
             Node new_node = new Node(new_data);
@@ -61,23 +63,30 @@ namespace ThuatToan
             }
             return count;
         }
-        public void BubbleSort(SinglyLinkedList singlyList)
+        public void BubbleSort(SinglyLinkedList singlyList, Canvas canvas1)
         {
+            int j = 0;
             Node current = null;
             bool Swapped = false;
             do
             {
+                j = 0;
                 current = singlyList.head;
                 Swapped = false;
                 while (current != null && current.next != null)
                 {
+                    
                     if (current.data > current.next.data)
                     {
                         Swapped = true;
+                        canvas1.Children[j].SetValue(Rectangle.HeightProperty, current.next.data);
+                        //Thread.Sleep(TimeSpan.FromSeconds(0.1));
+                        canvas1.Children[j + 1].SetValue(Rectangle.HeightProperty, current.data);
                         current.data = current.data + current.next.data;
                         current.next.data = current.data - current.next.data;
                         current.data = current.data - current.next.data;
                     }
+                    j++;
                     current = current.next;
                 }
             } while (Swapped == true);

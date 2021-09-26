@@ -43,25 +43,19 @@ namespace ThuatToan
 
         
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void btnSortLinkedList_Click(object sender, RoutedEventArgs e)
         {
-            int a = 0;
-            for (int i = 0; i < array.Length - 1; ++i)
-            {
-                for (int j = i + 1; j < array.Length; ++j)
-                {
-                    if (array[i] == array[j])
-                    {
-                        a += 1;
-                    }
-                }
-            }
-            MessageBox.Show(a.ToString());
+            Stopwatch start = new Stopwatch();
+            start.Start();
+            ArrayToLinkedList();
+            start.Stop();
+            MessageBox.Show($"{start.Elapsed.Seconds} giay, {start.Elapsed.Milliseconds} mili giay");
         }
 
         private void btnRandom_Click(object sender, RoutedEventArgs e)
         {
             random();
+            
         }
 
         private void NumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -134,6 +128,16 @@ namespace ThuatToan
                     }
                 }
             }
+        }
+        void ArrayToLinkedList()
+        {
+            SinglyLinkedList Linked_List = new SinglyLinkedList();
+            int length = array.Length;
+            for (int i = 0; i < length; i++)
+            {
+                Linked_List.InsertLast(Linked_List, array[i]);
+            }
+            Linked_List.BubbleSort(Linked_List, canvas1);
         }
         public void start_Swap_color(Rectangle item1, Rectangle item2)
         {

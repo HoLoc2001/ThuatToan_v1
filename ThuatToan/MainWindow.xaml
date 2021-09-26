@@ -10,8 +10,8 @@
         <Grid>
             <Slider x:Name="sliderNumber" Minimum="0" Maximum="1160" Margin="10,10,1000,579" IsSnapToTickEnabled="True" ValueChanged="sliderNumber_ValueChanged"/>
             <TextBox x:Name="NumberTextBox" Margin="228,10,920.667,579" PreviewTextInput="NumberValidationTextBox" Text="{Binding Path=Value, ElementName=sliderNumber, Mode=OneWay}" TextChanged="NumberTextBox_TextChanged" />
-            <Button x:Name="btnReset" Content="Sort" Margin="681,5,416.667,579" Click="btnSort_Click"/>
-            <Button x:Name="btnAdd" Margin="481,5,565,579" Content="Add" Click="btnAdd_Click"/>
+            <Button x:Name="btnSort" Content="Sort" Margin="681,5,416.667,579" Click="btnSort_Click"/>
+            <Button x:Name="btnSortLinkedList" Margin="481,5,565,579" Content="Sort Linked List" Click="btnSortLinkedList_Click"/>
             <Button x:Name="btnRandom" Margin="838,10,175,579" Content="Random" Click="btnRandom_Click" RenderTransformOrigin="0.602,-0.317"/>
             <ComboBox Margin="325,10,731.667,579" >
                 <ComboBoxItem Name="Bubble_sort" >Bubble sort</ComboBoxItem>
