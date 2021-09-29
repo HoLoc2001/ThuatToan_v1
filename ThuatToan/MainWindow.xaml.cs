@@ -29,7 +29,7 @@ namespace ThuatToan
         double[] array;
         double countWidth = 0;
         Random rand = new Random();
-
+        public double[] arrayClone;
 
         public MainWindow()
         {
@@ -43,15 +43,19 @@ namespace ThuatToan
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        
-
         private void btnSortLinkedList_Click(object sender, RoutedEventArgs e)
         {
-                Stopwatch start = new Stopwatch();
-                start.Start();
-                ArrayToLinkedList();
-                start.Stop();
-                MessageBox.Show($"{start.Elapsed.Seconds} giay, {start.Elapsed.Milliseconds} mili giay");
+            SinglyLinkedList Linked_List = new SinglyLinkedList();
+            int length = array.Length;
+            for (int i = 0; i < length; i++)
+            {
+                Linked_List.InsertLast(Linked_List, array[i]);
+            }
+            Stopwatch start = new Stopwatch();
+            start.Start();
+            Linked_List.BubbleSort(Linked_List, canvas1);
+            start.Stop();
+            MessageBox.Show($"{start.Elapsed.Seconds} giay, {start.Elapsed.Milliseconds} mili giay {start.Elapsed.Ticks * 100} nano");
            
         }
 
@@ -72,15 +76,13 @@ namespace ThuatToan
             random();
         }
 
-
         private void btnSort_Click(object sender, RoutedEventArgs e)
         {
             Stopwatch start = new Stopwatch();
             start.Start();
             bubble_sort.Bubble_sort(array,canvas1);
-            //BubbleSorted();
             start.Stop();
-            MessageBox.Show($"{start.Elapsed.Seconds} giay, {start.Elapsed.Milliseconds} mili giay");
+            MessageBox.Show($"{start.Elapsed.Seconds} giay, {start.Elapsed.Milliseconds} mili giay {start.Elapsed.Ticks * 100} nano");
         }
 
         void random()
@@ -105,7 +107,27 @@ namespace ThuatToan
             for (int i = 0; i < array.Length; i++)
             {
                 Rectangle rtgNext = new Rectangle();
-                rtgNext.Width = maxWidth / Number;
+                rtgNext.Width = maxWidth / (double)Number;
+                rtgNext.Height = array[i];
+                rtgNext.Fill = new SolidColorBrush(Colors.Black);
+                Canvas.SetLeft(rtgNext, countWidth);
+                Canvas.SetBottom(rtgNext, 0);
+                canvas1.Children.Add(rtgNext);
+                countWidth = countWidth + (maxWidth / (double)Number);
+            }
+            arrayClone = (double[])array.Clone();
+        }
+
+        private void BtnReset_Click(object sender, RoutedEventArgs e)
+        {
+            array = (double[])arrayClone.Clone();
+            if (canvas1 != null) { canvas1.Children.Clear(); }
+            countWidth = 0;
+            int maxWidth = 1160;
+            for (int i = 0; i < array.Length; i++)
+            {
+                Rectangle rtgNext = new Rectangle();
+                rtgNext.Width = maxWidth / (double)Number;
                 rtgNext.Height = array[i];
                 rtgNext.Fill = new SolidColorBrush(Colors.Black);
                 Canvas.SetLeft(rtgNext, countWidth);
@@ -114,39 +136,29 @@ namespace ThuatToan
                 countWidth = countWidth + (maxWidth / (double)Number);
             }
         }
-        void BubbleSorted()
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                for (int j = 0; j < array.Length - 1; j++)
-                {
-                    if (array[j] > array[j + 1])
-                    {
-                        canvas1.Children[j].SetValue(Rectangle.HeightProperty, array[j + 1]);
-                        Thread.Sleep(TimeSpan.FromSeconds(0.5));
-                        canvas1.Children[j + 1].SetValue(Rectangle.HeightProperty, array[j]);
-                        Thread.Sleep(TimeSpan.FromSeconds(0.5));
-                        array[j] = array[j] + array[j + 1];
-                        array[j + 1] = array[j] - array[j + 1];
-                        array[j] = array[j] - array[j + 1];
-                    }
-                }
-            }
-        }
-        void ArrayToLinkedList()
-        {
-            SinglyLinkedList Linked_List = new SinglyLinkedList();
-            int length = array.Length;
-            for (int i = 0; i < length; i++)
-            {
-                Linked_List.InsertLast(Linked_List, array[i]);
-            }
-            Linked_List.BubbleSort(Linked_List, canvas1);
-        }
-        
+
         public static void Refresh()
         {
             Dispatcher.CurrentDispatcher.Invoke(DispatcherPriority.Background, new EmptyDelegate(delegate { }));
         }
+        //void BubbleSorted()
+        //{
+        //    for (int i = 0; i < array.Length; i++)
+        //    {
+        //        for (int j = 0; j < array.Length - 1; j++)
+        //        {
+        //            if (array[j] > array[j + 1])
+        //            {
+        //                canvas1.Children[j].SetValue(Rectangle.HeightProperty, array[j + 1]);
+        //                Thread.Sleep(TimeSpan.FromSeconds(0.5));
+        //                canvas1.Children[j + 1].SetValue(Rectangle.HeightProperty, array[j]);
+        //                Thread.Sleep(TimeSpan.FromSeconds(0.5));
+        //                array[j] = array[j] + array[j + 1];
+        //                array[j + 1] = array[j] - array[j + 1];
+        //                array[j] = array[j] - array[j + 1];
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

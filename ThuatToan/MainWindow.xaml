@@ -8,12 +8,13 @@
         Title="MainWindow" Height="650" Width="1200" Foreground="#FF930F0F" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
         <Grid>
-            <Slider x:Name="sliderNumber" Minimum="0" Maximum="1160" Margin="10,10,1000,579" IsSnapToTickEnabled="True" ValueChanged="sliderNumber_ValueChanged"/>
-            <TextBox x:Name="NumberTextBox" Margin="228,10,920.667,579" PreviewTextInput="NumberValidationTextBox" Text="{Binding Path=Value, ElementName=sliderNumber, Mode=OneWay}" TextChanged="NumberTextBox_TextChanged" />
-            <Button x:Name="btnSort" Content="Sort" Margin="681,5,416.667,579" Click="btnSort_Click"/>
-            <Button x:Name="btnSortLinkedList" Margin="481,5,565,579" Content="Sort Linked List" Click="btnSortLinkedList_Click"/>
-            <Button x:Name="btnRandom" Margin="838,10,175,579" Content="Random" Click="btnRandom_Click" RenderTransformOrigin="0.602,-0.317"/>
-            <ComboBox Margin="325,10,731.667,579" >
+            <Slider x:Name="sliderNumber" Minimum="0" Maximum="2000" Margin="10,10,1000,579" IsSnapToTickEnabled="True" ValueChanged="sliderNumber_ValueChanged"/>
+            <TextBox x:Name="NumberTextBox" Margin="200,10,948.667,579" PreviewTextInput="NumberValidationTextBox" Text="{Binding Path=Value, ElementName=sliderNumber, Mode=OneWay}" TextChanged="NumberTextBox_TextChanged" />
+            <Button x:Name="btnSort" Content="Sort" Margin="625,5,472.667,579" Click="btnSort_Click"/>
+            <Button x:Name="btnSortLinkedList" Margin="450,5,595.667,579" Content="Sort Linked List" Click="btnSortLinkedList_Click"/>
+            <Button x:Name="btnRandom" Margin="763,8,249.667,581" Content="Random" Click="btnRandom_Click"/>
+            <Button x:Name="BtnReset" Margin="980,8,114.667,581" Content="Reset" Click="BtnReset_Click"></Button>
+            <ComboBox Margin="272,10,784.667,579" >
                 <ComboBoxItem Name="Bubble_sort" >Bubble sort</ComboBoxItem>
                 <ComboBoxItem>Quick sort</ComboBoxItem>
                 <ComboBoxItem>Heap sort</ComboBoxItem>
