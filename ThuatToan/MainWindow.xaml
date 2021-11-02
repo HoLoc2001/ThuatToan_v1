@@ -5,43 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThuatToan"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1200" Foreground="#FF930F0F" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        Title="Select" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
-        <Grid>
-            <Slider x:Name="sliderNumber" Minimum="0" Maximum="2000" Margin="10,10,1000,579" IsSnapToTickEnabled="True" ValueChanged="sliderNumber_ValueChanged"/>
-            <TextBox x:Name="NumberTextBox" Margin="200,10,948.667,579" PreviewTextInput="NumberValidationTextBox" Text="{Binding Path=Value, ElementName=sliderNumber, Mode=OneWay}" TextChanged="NumberTextBox_TextChanged" />
-            <Button x:Name="btnSort" Content="Sort" Margin="625,5,472.667,579" Click="btnSort_Click"/>
-            <Button x:Name="btnSortLinkedList" Margin="450,5,595.667,579" Content="Sort Linked List" Click="btnSortLinkedList_Click"/>
-            <Button x:Name="btnRandom" Margin="763,8,249.667,581" Content="Random" Click="btnRandom_Click"/>
-            <Button x:Name="BtnReset" Margin="980,8,114.667,581" Content="Reset" Click="BtnReset_Click"></Button>
-            <ComboBox Margin="272,10,784.667,579" >
-                <ComboBoxItem Name="Bubble_sort" >Bubble sort</ComboBoxItem>
-                <ComboBoxItem>Quick sort</ComboBoxItem>
-                <ComboBoxItem>Heap sort</ComboBoxItem>
-            </ComboBox>
-        </Grid>
-
-        <Canvas x:Name="canvas1" Margin="10,50,14,10" Background="#ccc">
-            <!--<Rectangle x:Name="cot1"
-                Width="10"
-                Height="300"
-                Fill="Black"
-                Canvas.Left="1"
-                Canvas.Bottom="0">
-            </Rectangle>
-            <Rectangle
-                Width="10"
-                Height="130"
-                Fill="Black"
-                Canvas.Left="11"
-                Canvas.Bottom="0"/>
-            <Rectangle
-                Width="10"
-                Height="100"
-                Fill="Black"
-                Canvas.Left="21"
-                Canvas.Bottom="0"/>-->
-        </Canvas>
-
+        <Button x:Name="btn" Content="Click" Margin="559,130,139.667,256" Click="btn_Click"></Button>
+        <CheckBox x:Name="cbBubble" Content="Bubble Sort" Margin="97,139,578.333,255.667" x:FieldModifier="public"></CheckBox>
+        <CheckBox x:Name="cbQuick" Content="Quick Sort" Margin="220,139,455.333,255.667" x:FieldModifier="public"></CheckBox>
+        <CheckBox x:Name="cbHead" Content="Head Sort" Margin="343,139,332.333,255.667"></CheckBox>
     </Grid>
 </Window>
